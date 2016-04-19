@@ -1,4 +1,16 @@
 {
+    "name": "havenshen/slim-born",
+    "description": "Slim Framework 3 skeleton application has authentication.",
+    "type": "project",
+    "keywords": ["slim", "slim 3", "skeleton", "authentication"],
+    "homepage": "https://github.com/HavenShen/slim-born",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HavenShen",
+            "email": "havenshen@gmail.com"
+        }
+    ],
     "require": {
         "slim/slim": "^3.0",
         "slim/twig-view": "^2.1",
