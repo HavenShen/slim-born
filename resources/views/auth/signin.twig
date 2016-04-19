@@ -1,0 +1,33 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    <div class="row">
+    	<div class="col-md-6 col-md-offset-3">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">Sign In</div>
+    			<div class="panel-body">
+    				<form action="{{ path_for('auth.signin') }}" method="post">
+    					<div class="form-group{{ errors.email ? ' has-error' : '' }}">
+    						<label for="email">Email</label>
+    						<input type="email" name="email" id="email" placeholder="you@domain.com" class="form-control" value="{{ old.email }}">
+                            {% if errors.email %}
+                            <span class="hel-block">{{ errors.email | first }}</span>
+                            {% endif %}
+    					</div>
+
+    					<div class="form-group{{ errors.password ? ' has-error' : '' }}">
+    						<label for="password">Password</label>
+    						<input type="password" name="password" id="password" class="form-control">
+                            {% if errors.password %}
+                            <span class="hel-block">{{ errors.password | first }}</span>
+                            {% endif %}
+    					</div>
+						<button type="submit" class="btn btn-default">Sign In</button>
+
+                        {{ csrf.field | raw }}
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+{% endblock %}
