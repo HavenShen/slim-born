@@ -24,7 +24,21 @@ composer create-project havenshen/slim-born [my-app]
 
 ## Directory Structure
 
-![slim](./slim.gif)
+```shell
+|-- slim-born
+	|-- app
+		|-- Auth
+		|-- Controllers
+		|-- Middleware
+		|-- Models
+		|-- Validation
+		|-- Routes.php
+	|-- bootstrap
+		|-- app.php
+	|-- public
+	|-- resources
+	....
+```
 
 
 
