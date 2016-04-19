@@ -23,20 +23,10 @@ composer create-project havenshen/slim-born [my-app]
 * [slimphp/Slim-Flash](https://github.com/slimphp/Slim-Flash) - Slim Framework created.
 
 ## Directory Structure
-```shell
-|-- slim-born
-	|-- app
-		|-- Auth
-		|-- Controllers
-		|-- Middleware
-		|-- Models
-		|-- Validation
-		|-- Routes.php
-	|-- bootstrap
-		|-- app.php
-	|-- public
-	|-- resources
-	....
-```
+
+![slim](./slim.gif)
+
+
+
 
 
