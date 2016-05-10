@@ -3,7 +3,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 [![License](https://img.shields.io/packagist/l/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 
-> Slim Framework 3 skeleton application has authentication.
+> Slim Framework 3 skeleton application has authentication MVC construction.
 
 The user authentication has been achieved, there is a need to install and use.
 
