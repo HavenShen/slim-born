@@ -2,3 +2,14 @@ body {
 	padding-top: 80px;
 	padding-bottom: 40px;
 }
+
+.content {
+	margin: 0 auto;
+    max-width: 100%;
+}
+
+.title {
+	padding-top: 30%;
+	text-align: center;
+    font-size: 96px;
+}

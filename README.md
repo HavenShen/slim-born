@@ -22,7 +22,11 @@ composer create-project havenshen/slim-born [my-app]
 * [slimphp/Twig-View](https://github.com/slimphp/Twig-View) - Slim Framework created.
 * [slimphp/Slim-Flash](https://github.com/slimphp/Slim-Flash) - Slim Framework created.
 
+## Look Feel
+
 ## Directory Structure
+
+![slimborn look feel](slimborn.png)
 
 ```shell
 |-- slim-born
