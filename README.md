@@ -24,9 +24,9 @@ composer create-project havenshen/slim-born [my-app]
 
 ## Look Feel
 
-## Directory Structure
-
 ![slimborn look feel](slimborn.png)
+
+## Directory Structure
 
 ```shell
 |-- slim-born
