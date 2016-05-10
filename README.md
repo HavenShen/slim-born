@@ -44,6 +44,10 @@ composer create-project havenshen/slim-born [my-app]
 	....
 ```
 
+## License
+
+MIT
+
 
 
 
