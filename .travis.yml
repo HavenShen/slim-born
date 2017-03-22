@@ -13,6 +13,3 @@ before_install:
 
 install:
   - composer install
-
-script:
-  - php vendor/bin/phpunit
