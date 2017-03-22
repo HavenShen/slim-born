@@ -3,11 +3,11 @@
 namespace App\Middleware;
 
 /**
-* 
+*
 */
 class CsrfViewMiddleware extends Middleware
 {
-	
+
 	public function __invoke($request,$response,$next)
 	{
 		$this->container->view->getEnvironment()->addGlobal('csrf',[
@@ -18,10 +18,9 @@ class CsrfViewMiddleware extends Middleware
 				 value="'. $this->container->csrf->getTokenValue() .'">
 			',
 		]);
-		$_SESSION['old'] = $request->getParams();
 
 		$response = $next($request,$response);
 		return $response;
-		
+
 	}
 }

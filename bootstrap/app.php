@@ -6,29 +6,22 @@ session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 
+try {
+    $dotenv = (new \Dotenv\Dotenv(__DIR__ . '/../'))->load();
+} catch (\Dotenv\Exception\InvalidPathException $e) {
+    //
+}
+
+require_once __DIR__ . '/database.php';
+
 $app = new \Slim\App([
 	'settings' => [
-		'displayErrorDetails' => true,
-		'db' => [
-			'driver' => 'mysql',
-			'host' => 'localhost',
-			'database' => 'authentication',
-			'username' => 'homestead',
-			'password' => 'secret',
-			'charset' => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix' => ''
-		]
+		'displayErrorDetails' => true
 	],
-	
+
 ]);
 
 $container = $app->getContainer();
-
-$capsule = new \Illuminate\Database\Capsule\Manager;
-$capsule->addConnection($container['settings']['db']);
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
 
 $container['db'] = function ($container) use ($capsule) {
 	return $capsule;
@@ -63,7 +56,7 @@ $container['view'] = function ($container) {
 };
 
 $container['validator'] = function ($container) {
-	return new App\Validation\validator;
+	return new App\Validation\Validator;
 };
 
 $container['HomeController'] = function($container) {
