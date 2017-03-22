@@ -4,20 +4,20 @@ namespace App\Auth;
 
 use App\Models\User;
 /**
-* 
+*
 */
 class Auth
 {
 	public function user()
 	{
-		return User::find(isset($_SESSION['user']) ? $_SESSION['user'] : '');
+		return User::find(isset($_SESSION['user']) ? $_SESSION['user'] : 0);
 	}
 
 	public function check()
 	{
 		return isset($_SESSION['user']);
 	}
-	
+
 	public function attempt($email,$password)
 	{
 		$user = User::where('email',$email)->first();
