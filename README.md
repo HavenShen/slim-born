@@ -13,6 +13,19 @@ The user authentication has been achieved, there is a need to install and use.
 composer create-project havenshen/slim-born [my-app]
 ```
 
+## .env
+
+Add file .env
+
+```
+DB_DRIVER=mysql
+DB_HOST=localhost
+DB_DATABASE=slimborn
+DB_USERNAME=root
+DB_PASSWORD=
+DB_PORT=3306
+```
+
 ## Router
 
 This is a Slim Framework  Router.
