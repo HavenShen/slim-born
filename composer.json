@@ -18,7 +18,8 @@
         "respect/validation": "^1.0",
         "slim/csrf": "^0.6.0",
         "slim/flash": "^0.1.0",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "phpunit/phpunit": "^6.0"
     },
     "autoload": {
     	"psr-4": {
