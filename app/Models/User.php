@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
-*
-*/
 class User extends Model
 {
 
@@ -58,7 +55,7 @@ class User extends Model
 
 	public function getEmail()
 	{
-	    return $this->email;
+		return $this->email;
 	}
 
 	public function getFullName()
