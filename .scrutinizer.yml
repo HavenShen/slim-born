@@ -1,8 +1,8 @@
 tools:
-    #external_code_coverage: true
+    external_code_coverage: true
     php_mess_detector: true
     php_code_sniffer: true
-    #sensiolabs_security_checker: true
+    sensiolabs_security_checker: true
     php_code_coverage: true
     php_pdepend: true
     php_loc:
@@ -15,7 +15,7 @@ build:
     tests:
         override:
             -
-                command: 'vendor/bin/phpunit --coverage-clover=my-file'
+                command: 'vendor/bin/phpunit --coverage-clover=my-coverage-file'
                 coverage:
-                    file: 'my-file'
+                    file: 'my-coverage-file'
                     format: 'clover'
