@@ -1,7 +1,10 @@
 # slim-born
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/HavenShen/slim-born/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/HavenShen/slim-born/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/HavenShen/slim-born/badges/build.png?b=master)](https://scrutinizer-ci.com/g/HavenShen/slim-born/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/HavenShen/slim-born/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/HavenShen/slim-born/?branch=master)
 [![Build Status](https://travis-ci.org/HavenShen/slim-born.svg?branch=master)](https://travis-ci.org/HavenShen/slim-born)
+[![Latest Stable Version](https://poser.pugx.org/HavenShen/slim-born/v/stable.svg)](https://packagist.org/packages/HavenShen/slim-born)
+[![Latest Unstable Version](https://poser.pugx.org/overtrue/wechat/v/unstable.svg)](https://packagist.org/packages/HavenShen/slim-born)
 [![Latest Stable Version](https://img.shields.io/packagist/v/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 [![Total Downloads](https://img.shields.io/packagist/dt/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 [![License](https://img.shields.io/packagist/l/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
