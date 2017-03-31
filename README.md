@@ -38,7 +38,7 @@ This is a Slim Framework  Router.
 Reference - [Slim Router](http://www.slimframework.com/docs/objects/router.html)
 
 ```php
-<?php 
+<?php
 
 $app->get('/','HomeController:index')->setName('home');
 
@@ -47,10 +47,10 @@ $app->group('',function () {
 
 	$this->get('/auth/signup','AuthController:getSignUp')->setName('auth.signup');
 	$this->post('/auth/signup','AuthController:postSignUp');
-	
+
 	$this->get('/auth/signin','AuthController:getSignIn')->setName('auth.signin');
 	$this->post('/auth/signin','AuthController:postSignIn');
-	
+
 })->add(new GuestMiddleware($container));
 ```
 
@@ -85,7 +85,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-	
+
 	protected $table = 'users';
 	protected $fillable = [
 		'email',
@@ -110,7 +110,7 @@ namespace App\Middleware;
 
 class AuthMiddleware extends Middleware
 {
-	
+
 	public function __invoke($request,$response,$next)
 	{
 		if(!$this->container->auth->check()) {
@@ -152,7 +152,7 @@ class AuthController extends Controller
 }
 ```
 
-## More basic functions 
+## More basic functions
 
 reference slim official documents - [Slim Framework](http://www.slimframework.com/docs/)
 
@@ -187,11 +187,12 @@ reference slim official documents - [Slim Framework](http://www.slimframework.co
 	....
 ```
 
+## Testing
+
+``` bash
+$ phpunit
+```
+
 ## License
 
-MIT
-
-
-
-
-
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
