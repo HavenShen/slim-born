@@ -21,7 +21,7 @@ composer create-project havenshen/slim-born [my-app]
 
 ## .env
 
-Add file .env
+Copy file .env.example to .env
 
 ```
 DB_DRIVER=mysql
@@ -40,17 +40,14 @@ Reference - [Slim Router](http://www.slimframework.com/docs/objects/router.html)
 ```php
 <?php
 
-$app->get('/','HomeController:index')->setName('home');
+$app->get('/', 'HomeController:index')->setName('home');
 
+$app->group('', function () {
+	$this->get('/auth/signup', 'AuthController:getSignUp')->setName('auth.signup');
+	$this->post('/auth/signup', 'AuthController:postSignUp');
 
-$app->group('',function () {
-
-	$this->get('/auth/signup','AuthController:getSignUp')->setName('auth.signup');
-	$this->post('/auth/signup','AuthController:postSignUp');
-
-	$this->get('/auth/signin','AuthController:getSignIn')->setName('auth.signin');
-	$this->post('/auth/signin','AuthController:postSignIn');
-
+	$this->get('/auth/signin', 'AuthController:getSignIn')->setName('auth.signin');
+	$this->post('/auth/signin', 'AuthController:postSignIn');
 })->add(new GuestMiddleware($container));
 ```
 
@@ -66,9 +63,9 @@ namespace App\Controllers;
 
 class HomeController extends Controller
 {
-	public function index($request,$response)
+	public function index($request, $response)
 	{
-		return $this->view->render($response,'home.twig');
+		return $this->view->render($response, 'home.twig');
 	}
 }
 ```
@@ -85,17 +82,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-
 	protected $table = 'users';
+
 	protected $fillable = [
 		'email',
 		'name',
 		'password',
 	];
+
 	public function setPassword($password)
 	{
 		$this->update([
-			'password' => password_hash($password,PASSWORD_DEFAULT)
+			'password' => password_hash($password, PASSWORD_DEFAULT)
 		]);
 	}
 }
@@ -110,14 +108,15 @@ namespace App\Middleware;
 
 class AuthMiddleware extends Middleware
 {
-
-	public function __invoke($request,$response,$next)
+	public function __invoke($request, $response, $next)
 	{
-		if(!$this->container->auth->check()) {
-			$this->container->flash->addMessage('error','Please sign in before doing that');
+		if(! $this->container->auth->check()) {
+			$this->container->flash->addMessage('error', 'Please sign in before doing that');
 			return $response->withRedirect($this->container->router->pathFor('auth.signin'));
 		}
-		$response = $next($request,$response);
+
+		$response = $next($request, $response);
+
 		return $response;
 	}
 }
@@ -137,16 +136,18 @@ use Respect\Validation\Validator as v;
 
 class AuthController extends Controller
 {
-	public function postSignUp($request,$response)
+	public function postSignUp($request, $response)
 	{
-		$validation = $this->validator->validate($request,[
+		$validation = $this->validator->validate($request, [
 			'email' => v::noWhitespace()->notEmpty()->email()->emailAvailable(),
 			'name' => v::noWhitespace()->notEmpty()->alpha(),
 			'password' => v::noWhitespace()->notEmpty(),
 		]);
+
 		if ($validation->failed()) {
 			return $response->withRedirect($this->router->pathFor('auth.signup'));
 		}
+
 		//	todo someting
 	}
 }
