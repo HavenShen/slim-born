@@ -4,9 +4,13 @@ namespace App\Validation\Rules;
 
 use App\Models\User;
 use Respect\Validation\Rules\AbstractRule;
+
 /**
-* 
-*/
+ * MatchesPassword
+ *
+ * @author    Haven Shen <havenshen@gmail.com>
+ * @copyright    Copyright (c) Haven Shen
+ */
 class MatchesPassword extends AbstractRule
 {
 	protected $password;
@@ -14,11 +18,10 @@ class MatchesPassword extends AbstractRule
 	public function __construct($password)
 	{
 		$this->password = $password;
-
 	}
 
 	public function validate($input)
 	{
-		return password_verify($input,$this->password);
+		return password_verify($input, $this->password);
 	}
 }

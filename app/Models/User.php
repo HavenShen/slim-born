@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * User
+ *
+ * @author    Haven Shen <havenshen@gmail.com>
+ * @copyright    Copyright (c) Haven Shen
+ */
 class User extends Model
 {
-
 	protected $table = 'users';
 
 	public $first_name;
@@ -24,7 +29,7 @@ class User extends Model
 	public function setPassword($password)
 	{
 		$this->update([
-			'password' => password_hash($password,PASSWORD_DEFAULT)
+			'password' => password_hash($password, PASSWORD_DEFAULT)
 		]);
 	}
 
@@ -65,9 +70,9 @@ class User extends Model
 
 	public function getEmailVariables()
 	{
-	return [
-		'full_name' => $this->getFullName(),
-		'email' => $this->getEmail(),
-	];
+		return [
+			'full_name' => $this->getFullName(),
+			'email' => $this->getEmail(),
+		];
 	}
 }

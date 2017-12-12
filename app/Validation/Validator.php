@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Validation;
 
@@ -6,13 +6,16 @@ use Respect\Validation\Validator as Respect;
 use Respect\Validation\Exceptions\NestedValidationException;
 
 /**
-* 
-*/
+ * Validator
+ *
+ * @author    Haven Shen <havenshen@gmail.com>
+ * @copyright    Copyright (c) Haven Shen
+ */
 class Validator
 {
 	protected $errors;
-	
-	public function validate($request,array $rules)
+
+	public function validate($request, array $rules)
 	{
 		foreach ($rules as $field => $rule) {
 			try {
@@ -20,7 +23,6 @@ class Validator
 			} catch (NestedValidationException $e) {
 				$this->errors[$field] = $e->getMessages();
 			}
-			
 		}
 
 		$_SESSION['errors'] = $this->errors;

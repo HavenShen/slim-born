@@ -3,14 +3,17 @@
 namespace App\Middleware;
 
 /**
-*
-*/
+ * CsrfViewMiddleware
+ *
+ * @author    Haven Shen <havenshen@gmail.com>
+ * @copyright    Copyright (c) Haven Shen
+ */
 class CsrfViewMiddleware extends Middleware
 {
 
-	public function __invoke($request,$response,$next)
+	public function __invoke($request, $response, $next)
 	{
-		$this->container->view->getEnvironment()->addGlobal('csrf',[
+		$this->container->view->getEnvironment()->addGlobal('csrf', [
 			'field' => '
 				<input type="hidden" name="'. $this->container->csrf->getTokenNameKey() .'"
 				 value="'. $this->container->csrf->getTokenName() .'">
@@ -19,8 +22,7 @@ class CsrfViewMiddleware extends Middleware
 			',
 		]);
 
-		$response = $next($request,$response);
+		$response = $next($request, $response);
 		return $response;
-
 	}
 }

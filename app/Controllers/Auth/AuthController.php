@@ -6,44 +6,49 @@ use App\Models\User;
 use App\Controllers\Controller;
 use Respect\Validation\Validator as v;
 
-
+/**
+ * AuthController
+ *
+ * @author    Haven Shen <havenshen@gmail.com>
+ * @copyright    Copyright (c) Haven Shen
+ */
 class AuthController extends Controller
 {
-	public function getSignOut($request,$response)
+	public function getSignOut($request, $response)
 	{
 		$this->auth->logout();
 		return $response->withRedirect($this->router->pathFor('home'));
 	}
 
-	public function getSignIn($request,$response)
+	public function getSignIn($request, $response)
 	{
-		return $this->view->render($response,'auth/signin.twig');
+		return $this->view->render($response, 'auth/signin.twig');
 	}
 
-	public function postSignIn($request,$response)
+	public function postSignIn($request, $response)
 	{
 		$auth = $this->auth->attempt(
 			$request->getParam('email'),
 			$request->getParam('password')
 		);
 
-		if (!$auth) {
-			$this->flash->addMessage('error','Could not sign you in with those details');
+		if (! $auth) {
+			$this->flash->addMessage('error', 'Could not sign you in with those details');
 			return $response->withRedirect($this->router->pathFor('auth.signin'));
 		}
 
 		return $response->withRedirect($this->router->pathFor('home'));
 	}
 
-	public function getSignUp($request,$response)
+	public function getSignUp($request, $response)
 	{
-		return $this->view->render($response,'auth/signup.twig');
+		return $this->view->render($response, 'auth/signup.twig');
 	}
 
-	public function postSignUp($request,$response)
+	public function postSignUp($request, $response)
 	{
 
-		$validation = $this->validator->validate($request,[
+		$validation = $this->validator->validate($request, [
 			'email' => v::noWhitespace()->notEmpty()->email()->emailAvailable(),
 			'name' => v::noWhitespace()->notEmpty()->alpha(),
 			'password' => v::noWhitespace()->notEmpty(),
@@ -56,10 +61,10 @@ class AuthController extends Controller
 		$user = User::create([
 			'email' => $request->getParam('email'),
 			'name' => $request->getParam('name'),
-			'password' => password_hash($request->getParam('password'),PASSWORD_DEFAULT),
+			'password' => password_hash($request->getParam('password'), PASSWORD_DEFAULT),
 		]);
 
-		$this->flash->addMessage('info','You have been signed up');
+		$this->flash->addMessage('info', 'You have been signed up');
 
 		$this->auth->attempt($user->email,$request->getParam('password'));
 
