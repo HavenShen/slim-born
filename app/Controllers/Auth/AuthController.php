@@ -17,7 +17,7 @@ class AuthController extends Controller
 	public function getSignOut($request, $response)
 	{
 		$this->auth->logout();
-		return $response->withRedirect($this->router->pathFor('home'));
+		return $response->withHeader('Location', $this->router->urlFor('home'));
 	}
 
 	public function getSignIn($request, $response)
@@ -27,17 +27,18 @@ class AuthController extends Controller
 
 	public function postSignIn($request, $response)
 	{
+		$data = $request->getParsedBody();
 		$auth = $this->auth->attempt(
-			$request->getParam('email'),
-			$request->getParam('password')
+			$data['email'],
+			$data['password']
 		);
 
 		if (! $auth) {
 			$this->flash->addMessage('error', 'Could not sign you in with those details');
-			return $response->withRedirect($this->router->pathFor('auth.signin'));
+			return $response->withHeader('Location', $this->router->urlFor('auth.signin'));
 		}
 
-		return $response->withRedirect($this->router->pathFor('home'));
+		return $response->withHeader('Location', $this->router->urlFor('home'));
 	}
 
 	public function getSignUp($request, $response)
@@ -55,19 +56,21 @@ class AuthController extends Controller
 		]);
 
 		if ($validation->failed()) {
-			return $response->withRedirect($this->router->pathFor('auth.signup'));
+			return $response->withHeader('Location', $this->router->urlFor('auth.signup'));
 		}
 
+		$data = $request->getParsedBody();
+
 		$user = User::create([
-			'email' => $request->getParam('email'),
-			'name' => $request->getParam('name'),
-			'password' => password_hash($request->getParam('password'), PASSWORD_DEFAULT),
+			'email' => $data['email'],
+			'name' => $data['name'],
+			'password' => password_hash($data['password'], PASSWORD_DEFAULT),
 		]);
 
 		$this->flash->addMessage('info', 'You have been signed up');
 
-		$this->auth->attempt($user->email,$request->getParam('password'));
+		$this->auth->attempt($user->email, $data['password']);
 
-		return $response->withRedirect($this->router->pathFor('home'));
+		return $response->withHeader('Location', $this->router->urlFor('home'));
 	}
 }

@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ path_for('home') }}">SlimBorn</a>
+          <a class="navbar-brand" href="{{ url_for('home') }}">SlimBorn</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -18,13 +18,13 @@
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
-                <li><a href="{{ path_for('auth.password.change') }}">Change Password</a></li>
-                <li><a href="{{ path_for('auth.signout') }}">Sign Out</a></li>
+                <li><a href="{{ url_for('auth.password.change') }}">Change Password</a></li>
+                <li><a href="{{ url_for('auth.signout') }}">Sign Out</a></li>
               </ul>
             </li>
             {% else %}
-            <li><a href="{{ path_for('auth.signin') }}">Sign In</a></li>
-            <li><a href="{{ path_for('auth.signup') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('auth.signin') }}">Sign In</a></li>
+            <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
             {% endif %}
           </ul>
         </div><!--/.nav-collapse -->

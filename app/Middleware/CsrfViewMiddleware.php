@@ -2,6 +2,10 @@
 
 namespace App\Middleware;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Psr7\Response;
+
 /**
  * CsrfViewMiddleware
  *
@@ -11,18 +15,19 @@ namespace App\Middleware;
 class CsrfViewMiddleware extends Middleware
 {
 
-	public function __invoke($request, $response, $next)
+	public function __invoke(Request $request, RequestHandler $handler): Response
 	{
-		$this->container->view->getEnvironment()->addGlobal('csrf', [
+
+		$this->container->get('view')->getEnvironment()->addGlobal('csrf', [
 			'field' => '
-				<input type="hidden" name="'. $this->container->csrf->getTokenNameKey() .'"
-				 value="'. $this->container->csrf->getTokenName() .'">
-				<input type="hidden" name="'. $this->container->csrf->getTokenValueKey() .'"
-				 value="'. $this->container->csrf->getTokenValue() .'">
+				<input type="hidden" name="'. $this->container->get('csrf')->getTokenNameKey() .'"
+				 value="'. $this->container->get('csrf')->getTokenName() .'">
+				<input type="hidden" name="'. $this->container->get('csrf')->getTokenValueKey() .'"
+				 value="'. $this->container->get('csrf')->getTokenValue() .'">
 			',
 		]);
 
-		$response = $next($request, $response);
+		$response = $handler->handle($request);
 		return $response;
 	}
 }

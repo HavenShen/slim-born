@@ -2,6 +2,10 @@
 
 namespace App\Middleware;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Psr7\Response;
+
 /**
  * GuestMiddleware
  *
@@ -11,13 +15,13 @@ namespace App\Middleware;
 class GuestMiddleware extends Middleware
 {
 
-	public function __invoke($request, $response, $next)
+	public function __invoke(Request $request, RequestHandler $handler): Response
 	{
-		if($this->container->auth->check()) {
-			return $response->withRedirect($this->container->router->pathFor('home'));
+		if($this->container->get('auth')->check()) {
+			return $response->withRedirect($this->container->get('router')->urlFor('home'));
 		}
 
-		$response = $next($request, $response);
-		return $response;
+		$response = $handler->handle($request);
+        return $response;
 	}
 }
