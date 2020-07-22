@@ -21,20 +21,22 @@ class PasswordController extends Controller
 
 	public function postChangePassword($request, $response)
 	{
+		$data = $request->getParsedBody();
+
 		$validation = $this->validator->validate($request, [
 			'password_old' => v::noWhitespace()->notEmpty()->matchesPassword($this->auth->user()->password),
 			'password' => v::noWhitespace()->notEmpty(),
 		]);
 
 		if ($validation->failed()) {
-			return $response->withRedirect($this->router->pathFor('auth.password.change'));
+			return $response->withHeader('Location', $this->router->urlFor('auth.password.change'));
 		}
 
-		$this->auth->user()->setPassword($request->getParam('password'));
+		$this->auth->user()->setPassword($data['password']);
 
 		$this->flash->addMessage('info', 'Your password was changed');
 
-		return $response->withRedirect($this->router->pathFor('home'));
+		return $response->withHeader('Location', $this->router->urlFor('home'));
 
 	}
 }

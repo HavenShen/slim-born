@@ -12,13 +12,15 @@
         }
     ],
     "require": {
-        "slim/slim": "^3.0",
-        "slim/twig-view": "^2.1",
+        "slim/slim": "4.*",
+        "slim/twig-view": "^3.0",
         "illuminate/database": "^5.2",
         "respect/validation": "^1.0",
-        "slim/csrf": "^0.6.0",
+        "slim/csrf": "^1.0.0",
         "slim/flash": "^0.1.0",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "php-di/php-di": "^6.2",
+        "slim/psr7": "^1.1"
     },
     "autoload": {
     	"psr-4": {
@@ -26,6 +28,7 @@
     	}
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "symfony/var-dumper": "^5.1"
     }
 }

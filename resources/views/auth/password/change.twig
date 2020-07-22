@@ -6,7 +6,7 @@
     		<div class="panel panel-default">
     			<div class="panel-heading">Change Password</div>
     			<div class="panel-body">
-    				<form action="{{ path_for('auth.password.change') }}" method="post">
+    				<form action="{{ url_for('auth.password.change') }}" method="post">
                         <div class="form-group{{ errors.password_old ? ' has-error' : '' }}">
                             <label for="password_old">Current Password</label>
                             <input type="password" name="password_old" id="password_old" class="form-control">

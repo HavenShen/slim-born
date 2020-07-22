@@ -2,6 +2,10 @@
 
 namespace App\Middleware;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Psr7\Response;
+
 /**
  * ValidationErrorsMiddleware
  *
@@ -11,12 +15,12 @@ namespace App\Middleware;
 class ValidationErrorsMiddleware extends Middleware
 {
 
-	public function __invoke($request, $response, $next)
+	public function __invoke(Request $request, RequestHandler $handler): Response
 	{
-		$this->container->view->getEnvironment()->addGlobal('errors', isset($_SESSION['errors']) ? $_SESSION['errors'] : '');
+		$this->container->get('view')->getEnvironment()->addGlobal('errors', isset($_SESSION['errors']) ? $_SESSION['errors'] : '');
 		unset($_SESSION['errors']);
 
-		$response = $next($request, $response);
+		$response = $handler->handle($request);
 		return $response;
 	}
 }

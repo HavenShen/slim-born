@@ -2,6 +2,8 @@
 
 namespace App\Middleware;
 
+use DI\Container;
+
 /**
  * Middleware
  *
@@ -12,7 +14,7 @@ class Middleware
 {
 	protected $container;
 
-	public function __construct($container)
+	public function __construct(Container $container)
 	{
 		$this->container = $container;
 	}

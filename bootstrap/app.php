@@ -1,6 +1,14 @@
 <?php
 
+use DI\Container;
 use Respect\Validation\Validator as v;
+use Slim\Csrf\Guard;
+use Slim\Factory\AppFactory;
+use Slim\Handlers\Strategies\RequestResponseArgs;
+use Slim\Psr7\Factory\UriFactory;
+use Slim\Views\Twig;
+use Slim\Views\TwigExtension;
+use Slim\Views\TwigRuntimeLoader;
 
 session_start();
 
@@ -12,75 +20,85 @@ try {
 	//
 }
 
-$app = new \Slim\App([
-	'settings' => [
-		'displayErrorDetails' => true
-	],
-]);
+$container = new Container();
+// Set container to create App with on AppFactory
+AppFactory::setContainer($container);
+
+$app = AppFactory::create();
+$responseFactory = $app->getResponseFactory();
+
+$routeCollector = $app->getRouteCollector();
+$routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
+$routeParser = $app->getRouteCollector()->getRouteParser();
+
+$container->set('settings', function () {
+    return [
+    	'displayErrorDetails' => true,
+        'app' => [
+            'name' => getenv('APP_NAME')
+        ]
+    ];
+});
 
 require_once __DIR__ . '/database.php';
 
-$container = $app->getContainer();
+$container->set('router', function () use ($routeParser) {
+    return $routeParser;
+});
 
-$container['db'] = function ($container) use ($capsule) {
+$container->set('db', function () use ($capsule) {
 	return $capsule;
-};
+});
 
-$container['auth'] = function($container) {
+$container->set('auth', function() {
 	return new \App\Auth\Auth;
-};
+});
 
-$container['flash'] = function($container) {
+$container->set('flash', function() {
 	return new \Slim\Flash\Messages;
-};
+});
 
-$container['view'] = function ($container) {
-	$view = new \Slim\Views\Twig(__DIR__ . '/../resources/views/', [
+$container->set('view', function ($container) use ($app) {
+	$view = Twig::create(__DIR__ . '/../resources/views', [
 		'cache' => false,
 	]);
 
-	$view->addExtension(new \Slim\Views\TwigExtension(
-		$container->router,
-		$container->request->getUri()
+	$runtimeLoader = new TwigRuntimeLoader(
+        $app->getRouteCollector()->getRouteParser(),
+        (new UriFactory)->createFromGlobals($_SERVER),
+        '/'
+    );
+
+    $view->addRuntimeLoader($runtimeLoader);
+
+	$view->addExtension(new TwigExtension(
+		$app->getRouteCollector()->getRouteParser(),
+        $app->getBasePath()
 	));
 
 	$view->getEnvironment()->addGlobal('auth', [
-		'check' => $container->auth->check(),
-		'user' => $container->auth->user()
+		'check' => $container->get('auth')->check(),
+		'user' => $container->get('auth')->user()
 	]);
 
-	$view->getEnvironment()->addGlobal('flash', $container->flash);
+	$view->getEnvironment()->addGlobal('flash', $container->get('flash'));
 
 	return $view;
-};
+});
 
-$container['validator'] = function ($container) {
+$container->set('validator', function ($container) {
 	return new App\Validation\Validator;
-};
+});
 
-$container['HomeController'] = function($container) {
-	return new \App\Controllers\HomeController($container);
-};
-
-$container['AuthController'] = function($container) {
-	return new \App\Controllers\Auth\AuthController($container);
-};
-
-$container['PasswordController'] = function($container) {
-	return new \App\Controllers\Auth\PasswordController($container);
-};
-
-$container['csrf'] = function($container) {
-	return new \Slim\Csrf\Guard;
-};
-
-
+$container->set('csrf', function($container) use ($responseFactory) {
+	return new Guard($responseFactory);
+});
 
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
 $app->add(new \App\Middleware\CsrfViewMiddleware($container));
 
-$app->add($container->csrf);
+$app->add('csrf');
 
 v::with('App\\Validation\\Rules\\');
 
