@@ -9,14 +9,22 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 [![License](https://img.shields.io/packagist/l/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 
-> Slim Framework 3 skeleton application has authentication MVC construction.
+> Slim Framework 3 or 4 skeleton application has authentication MVC construction.
 
-The user authentication has been achieved, there is a need to install and use.
+The user authentication has been achieved,  there is a need to install and use.
 
 ## Installation
 
+### For Slim 3
+
 ```shell
-composer create-project havenshen/slim-born [my-app]
+composer create-project "havenshen/slim-born v1.0.6" [my-app]
+```
+
+### For Slim 4
+
+```shell
+composer create-project "havenshen/slim-born 2.0" [my-app]
 ```
 
 ## .env
@@ -193,6 +201,10 @@ reference slim official documents - [Slim Framework](http://www.slimframework.co
 ``` bash
 $ phpunit
 ```
+
+## Contributing
+
+Feel free to submit any minor enhancements, the goal here is to keep this as simple (yet as practical) as possible.
 
 ## License
 
