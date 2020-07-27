@@ -8,6 +8,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 [![Total Downloads](https://img.shields.io/packagist/dt/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
 [![License](https://img.shields.io/packagist/l/HavenShen/slim-born.svg?style=flat-square)](https://packagist.org/packages/HavenShen/slim-born)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHavenShen%2Fslim-born.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FHavenShen%2Fslim-born?ref=badge_shield)
 
 > Slim Framework 3 or 4 skeleton application has authentication MVC construction.
 
@@ -209,3 +210,6 @@ Feel free to submit any minor enhancements, the goal here is to keep this as sim
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHavenShen%2Fslim-born.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FHavenShen%2Fslim-born?ref=badge_large)
