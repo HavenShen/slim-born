@@ -14,7 +14,7 @@
     "require": {
         "slim/slim": "4.*",
         "slim/twig-view": "^3.0",
-        "illuminate/database": "^5.2",
+        "illuminate/database": "^6.20",
         "respect/validation": "^1.0",
         "slim/csrf": "^1.0.0",
         "slim/flash": "^0.1.0",
